@@ -7,7 +7,6 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(req: Request) {
   const body = await req.json();
   const { email, curso } = body;
-  console.log({ body });
   const primeiroLink = curso.links?.[0];
 
   if (!email || !primeiroLink) {
@@ -21,19 +20,19 @@ export async function POST(req: Request) {
   }
 
   try {
-    console.log("dentro do try");
     const data = await resend.emails.send({
-      from: "Seu Nome <onboarding@resend.dev>",
+      from: `${curso.nome}<onboarding@resend.dev>`,
       to: [email],
       subject: `Bem-vindo ao curso ${curso.nome}`,
       html: `
-        <h1>Olá!</h1>
-        <p>Você foi inscrito no curso <strong>${curso.nome}</strong>.</p>
-        <p>Aqui está seu primeiro link de acesso:</p>
-        <a href="${primeiroLink}" target="_blank">${primeiroLink}</a>
-        <br/><br/>
-        <small>Este é um envio automático.</small>
-      `,
+      <h1>Olá!</h1>
+      <p>Você está inscrito no curso <strong>${curso.nome}</strong>.</p>
+      <p>Aqui está o link da primeira semana:</p>
+      ${`<p><strong>Matéria 1:</strong> <a href="${curso.links[0]}" target="_blank">${curso.links[0]}</a></p>`}
+        
+      <br/>
+      <small>Este é um envio automático.</small>
+    `,
     });
     console.log({ data });
 

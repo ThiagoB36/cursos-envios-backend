@@ -1,0 +1,14 @@
+name: Verificar estudantes e enviar e-mails
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # Executa todos os dias às 6:00 UTC
+  workflow_dispatch: # Permite executar manualmente
+
+jobs:
+  check-emails:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Requisição para API de verificação
+        run: curl -s -X GET https://cursos-envios-backend.vercel.app/api/check
