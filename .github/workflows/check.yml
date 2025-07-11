@@ -2,8 +2,8 @@ name: Verificar estudantes e enviar e-mails
 
 on:
   schedule:
-    - cron: "*/2 * * * *" # A cada 2 minutos (UTC)
-    # - cron: "0 6 * * *" # Executa todos os dias às 6:00 UTC
+    # - cron: "*/2 * * * *" # A cada 2 minutos (UTC)
+    - cron: "0 6 * * *" # Executa todos os dias às 6:00 UTC
   workflow_dispatch: # Permite executar manualmente
 
 jobs:
