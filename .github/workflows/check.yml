@@ -11,5 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Mostrar hora
+        run: date
       - name: Requisição para API de verificação
         run: curl -s -X GET https://cursos-envios-backend.vercel.app/api/check
